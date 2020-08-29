@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function Fonction_entrer() {
+    var prixEntrer = 0;
+    var SelectEntrer = document.getElementById('entrer').value;
+    if (SelectEntrer == 1) {
+        prixEntrer = 9; 
+    }
+    else if (SelectEntrer == 2) {
+        prixEntrer = 20;
+    }
+    else if (SelectEntrer == 3) {
+        prixEntrer = 15;
+    } 
+    else prixEntrer = 0;
+    return prixEntrer;
+}
+function Fonction_Plat() {
+    prixPlt=0;
+    var SelectPlat= document.getElementById('plat').value;
+    if (SelectPlat == 1){
+        prixPlt=18;
+    }
+    else if (SelectPlat == 2) {
+        prixPlt = 40;
+    }
+    else prixPlt = 0;
+    return prixPlt;
+}
+
+function Fonction_Dsrt() {
+    prixDsrt=0;
+    var SelectDessert = document.getElementById('Dessert').value;
+    if (SelectDessert == 1) { 
+        prixDsrt = 10;
+    } 
+    else if (SelectDessert == 2) {
+        prixDsrt = 15;
+    }
+    else if (SelectDessert == 3) {
+        prixDsrt = 8;
+    }
+    else prixDsrt = 0;
+    return prixDsrt;
+}
+
+function prixCommand() {
+    /**
+     * Entrer
+     */
+    if (document.getElementById('entrer').value != '0'){
+        if (document.getElementById('NombrePerson1').value == '0')
+            document.getElementById('NombrePerson1').value = 1;
+    } else 
+        document.getElementById('NombrePerson1').value = 0;
+
+    /**
+     * Plat
+     */
+    if (document.getElementById('plat').value != '0'){
+        if(document.getElementById('NombrePerson2').value == '0')
+            document.getElementById('NombrePerson2').value = 1;
+    } else 
+        document.getElementById('NombrePerson2').value = 0;
+
+    /**
+     * Dessert
+     */
+    if (document.getElementById('Dessert').value != '0'){
+        if(document.getElementById('NombrePerson3').value == '0')
+            document.getElementById('NombrePerson3').value = 1;
+    } else 
+        document.getElementById('NombrePerson3').value = 0;
+
+
+    var NombrePersonEntrer = document.getElementById('NombrePerson1').value;
+    var NombrePersonPlat = document.getElementById('NombrePerson2').value;
+    var NombrePersonDessert = document.getElementById('NombrePerson3').value;
+
+    var prix = Fonction_entrer()*NombrePersonEntrer + Fonction_Plat()*NombrePersonPlat + Fonction_Dsrt()*NombrePersonDessert;
+
+    document.getElementById('prix').value = prix;
+}
+
+function VerifierCommande() {
+    isAdresseValid(document.getElementById('adresse'));
+}
+
+function isAdresseValid(chaine){
+       
+    if(chaine.value != '') {
+        var x = /^[a-zA-Z]+[0-9]{5,5}[a-zA-Z]{2,}$/;
+        if (chaine.value.match(x)) {
+            if (document.getElementById('entrer').value != 0 || document.getElementById('plat').value != 0 || document.getElementById('Dessert').value != 0) {
+                document.write('<A HREF="MAILTO:Restaurant_Exemple@gmail.ma?Subject=noveu_Commande"> Envoyer email !!</A>');
+                alert( "La commande a été envoyée." );
+            } else {
+                alert("Désolé!! Tu dois prendre au moins: Entrée ou Plat ou Dessert.");
+            }
+            
+            return (true)
+        } else{
+            alert("L'Adresse doit contenir Quartier ET Code Postal suivi de la ville!!");
+        }
+    } else {
+        alert("Le champ adresse est vide!");
+        return(false)
+    }
+       
+}
+    </script>
+</head>
+<body>
+    <div class="titre">
+        <h1>Votre Commande :</h1>
+    </div>
+    <div class="form">
+        <form action="">
+            <label for=""> Entrer</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select id="entrer" onChange="prixCommand()">
+                <option value="0">Aucun</option>
+                <option value="1">Soupe</option>
+                <option value="2">Charcuterie</option>
+                <option value="3">Salade</option>
+            </select>&nbsp;&nbsp; Pour <input type="number" id="NombrePerson1" value="0" onchange="prixCommand()" size="1" min="0" max="5" > personnes <br><br>
+     
+             <label for="">Plat</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  
+             <select id="plat" onchange="prixCommand()">
+               <option value="0">Aucun</option>
+               <option value="1">Couscouse </option>
+               <option value="2">Bouillabaisse</option>
+             </select>&nbsp;&nbsp; Pour <input type="number" id="NombrePerson2" onchange="prixCommand()" value="0" size="1" min="0" max="5"> personnes <br> <br>  
+             <label for=""> Dessert</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <select id="Dessert" onchange="prixCommand()">
+                 <option value="0">Aucun</option>
+                 <option value="1">Glasse</option>
+                 <option value="2">Tarte au citron</option>
+                 <option value="3">Brownie</option>
+             </select>&nbsp;&nbsp; Pour <input type="number" id="NombrePerson3" onchange="prixCommand()" value="0" size="1" min="0" max="4"> personnes <br><br>
+     
+            <label for=""> Adresse</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <textarea id="adresse" name="adrss" rows="4" cols="50"></textarea><br><br>
+            <label id="prix-label">Prix :</label>&nbsp;
+            <input type="text" id="prix" value="0" disabled><br>
+            <input type="button" name="cm" id="btn-envoyer" value="Commander" onclick="VerifierCommande()">
+     
+         </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+input {
+	height: 30px;
+	
+}
+select{
+	height: 30px;
+	width: 270px;
+}
+h1 {
+	font-size: 25px;
+	font-weight: bold;
+
+}
+label {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.titre {
+	width: 50%;
+	height: 40px;
+	margin-left: 25%;
+	background: grey;
+	padding: 20px;
+}
+.form{
+	/* text-align: center; */
+}
+
+form {
+	border: 2px solid #000000;
+	width: 48.5%;
+	margin-left: 25%;
+	margin-top: 2%;
+	padding: 30px;
+}
+#btn-envoyer {
+	width: 150px;
+	height: 40px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 35px;
+}
+
+#btn-envoyer:hover {
+	cursor: pointer;
+	background: transparent;
+	color: #000000;
+}
+
+#prix-label {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#prix {
+	margin-left: 20px;
+	width: 150px;
+}
